@@ -1,1 +1,481 @@
-placeholder
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrigonumTrade — Platform Flexibility (Presentation)</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared-tokens.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font);
+  background: var(--navy-900);
+  color: var(--white-92);
+  min-height: 100vh;
+}
+
+.workspace { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 260px;
+  background: var(--navy-800);
+  border-right: 1px solid var(--white-08);
+  padding: 24px 0;
+  flex-shrink: 0;
+}
+
+.sidebar-brand {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid var(--white-08);
+  margin-bottom: 8px;
+}
+
+.logo { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--white-92); }
+.logo-box { width: 28px; height: 28px; background: linear-gradient(135deg, var(--cyan), var(--purple)); border-radius: 6px; }
+.logo-text { font-size: 14px; font-weight: 700; }
+
+.role-tag {
+  display: inline-block; margin-top: 10px;
+  padding: 4px 10px; border-radius: var(--r-full);
+  font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  background: rgba(18,204,255,0.15); color: var(--cyan); border: 1px solid rgba(18,204,255,0.25);
+}
+
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 20px; font-size: 13px; font-weight: 500;
+  color: var(--white-55); position: relative; cursor: pointer; text-decoration: none;
+}
+.nav-item:hover { color: var(--white-75); background: var(--white-05); }
+.nav-item.active { color: var(--white-92); background: var(--white-08); }
+.nav-item.active::before {
+  content: ''; position: absolute; left: 0; top: 3px; bottom: 3px; width: 3px;
+  border-radius: 0 2px 2px 0;
+  background: linear-gradient(180deg, var(--cyan), var(--purple));
+}
+
+.main { flex: 1; padding: 28px 32px; overflow: auto; }
+
+/* Sub-tabs */
+.sub-tabs { display: flex; border-bottom: 1px solid var(--white-08); margin-bottom: 24px; }
+
+.sub-tab {
+  padding: 12px 24px; font-size: 13px; font-weight: 500;
+  color: var(--white-55); background: none; border: none; cursor: pointer; position: relative;
+}
+.sub-tab:hover { color: var(--white-75); }
+.sub-tab.active { color: var(--white-92); }
+.sub-tab.active::after {
+  content: ''; position: absolute; bottom: -1px; left: 12px; right: 12px; height: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--purple)); border-radius: 2px;
+}
+
+/* Program cards grid */
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.program-card {
+  background: var(--card-gradient);
+  border: 1px solid var(--white-08);
+  border-radius: var(--r-lg);
+  padding: 20px 24px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.program-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevated);
+}
+.program-card::before {
+  content: '';
+  position: absolute; top: -15px; right: -15px;
+  width: 0; height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 70px solid var(--white-03);
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.program-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 16px;
+}
+.program-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+.program-strategy { font-size: 12px; color: var(--white-55); }
+
+.badge {
+  display: inline-block; padding: 3px 12px;
+  border-radius: var(--r-full); font-size: 11px; font-weight: 500;
+}
+.badge-active { background: rgba(0,230,138,0.1); color: var(--green); }
+.badge-paused { background: rgba(255,176,32,0.1); color: var(--amber); }
+
+.program-metrics {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 12px; margin-bottom: 16px;
+}
+
+.metric-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--white-55); margin-bottom: 2px;
+}
+.metric-value { font-size: 16px; font-weight: 700; }
+
+.program-actions {
+  display: flex; gap: 6px;
+  border-top: 1px solid var(--white-08); padding-top: 12px;
+}
+.action-btn-sm {
+  padding: 6px 12px; border-radius: var(--r-sm);
+  font-size: 11px; font-weight: 500; cursor: pointer;
+  border: 1px solid var(--white-15); background: var(--white-08);
+  color: var(--white-75); font-family: var(--font);
+}
+.action-btn-sm:hover { background: var(--white-15); }
+
+/* Section header */
+.section-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 20px;
+}
+.section-title { font-size: 18px; font-weight: 700; }
+
+/* Profit Distribution table */
+.dist-table-card {
+  background: var(--card-gradient);
+  border: 1px solid var(--white-08);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 32px;
+}
+
+.data-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+.data-table th {
+  font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--white-55); padding: 12px 16px; text-align: left;
+  border-bottom: 1px solid var(--white-08); background: var(--white-03);
+}
+.data-table td {
+  font-size: 13px; padding: 12px 16px;
+  border-bottom: 1px solid var(--white-05); color: var(--white-75);
+}
+.data-table tr:hover td { background: var(--white-03); }
+
+.trader-cell { display: flex; align-items: center; gap: 10px; }
+.trader-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--white-08); display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 700; color: var(--white-55);
+}
+
+.role-badge-inline {
+  display: inline-block; padding: 2px 8px; border-radius: var(--r-full);
+  font-size: 10px; font-weight: 500; text-transform: uppercase;
+}
+.role-badge-inline.tl { background: rgba(18,204,255,0.15); color: var(--cyan); }
+.role-badge-inline.st { background: rgba(0,230,138,0.15); color: var(--green); }
+.role-badge-inline.trader { background: rgba(255,255,255,0.08); color: var(--white-75); }
+
+.exchange-badge-sm {
+  display: inline-flex; align-items: center; gap: 3px;
+  padding: 2px 8px; border-radius: var(--r-full);
+  font-size: 10px; font-weight: 500;
+}
+.exchange-badge-sm.bybit { background: rgba(255,176,32,0.1); color: var(--amber); }
+.exchange-badge-sm.binance { background: rgba(243,186,47,0.1); color: #F3BA2F; }
+
+/* Role-Based Access card */
+.access-card {
+  background: var(--card-gradient);
+  border: 1px solid var(--white-08);
+  border-radius: var(--r-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+.access-card::before {
+  content: '';
+  position: absolute; top: -15px; right: -15px;
+  width: 0; height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 70px solid var(--white-03);
+  transform: rotate(15deg);
+  pointer-events: none;
+}
+
+.access-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px;
+}
+
+.access-item {
+  background: var(--white-05);
+  border: 1px solid var(--white-08);
+  border-radius: var(--r-md);
+  padding: 14px;
+  text-align: center;
+}
+.access-role {
+  font-size: 12px; font-weight: 600; margin-bottom: 8px;
+}
+.access-role.tl { color: var(--cyan); }
+.access-role.st { color: var(--green); }
+.access-role.rm { color: var(--purple); }
+.access-role.trader-role { color: var(--white-75); }
+.access-role.investor-role { color: var(--amber); }
+
+.access-level {
+  font-size: 11px; color: var(--white-55);
+  padding: 4px 10px; border-radius: var(--r-full);
+  background: var(--white-08); display: inline-block;
+}
+.access-level.full { background: rgba(18,204,255,0.1); color: var(--cyan); }
+.access-level.team { background: rgba(0,230,138,0.1); color: var(--green); }
+.access-level.risk { background: rgba(175,51,255,0.1); color: var(--purple); }
+.access-level.own { background: var(--white-08); color: var(--white-55); }
+.access-level.reports { background: rgba(255,176,32,0.1); color: var(--amber); }
+
+.pnl-positive { color: var(--green); font-weight: 500; }
+.pnl-negative { color: var(--red); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="video-bg-container"><video src="https://ipostny.github.io/trigonum-design-mockups/video-header.mp4" autoplay muted loop playsinline></video></div>
+<div class="prototype-badge">PROTOTYPE</div>
+
+<div class="workspace">
+  <div class="sidebar">
+    <div class="sidebar-brand">
+      <a class="logo">
+        <div class="logo-box"></div>
+        <span class="logo-text">TrigonumTrade</span>
+      </a>
+      <div class="role-tag">Team Lead</div>
+    </div>
+    <a class="nav-item">&#128202; Analytics</a>
+    <a class="nav-item">&#128200; Trading</a>
+    <a class="nav-item">&#127942; Performance</a>
+    <a class="nav-item">&#128737; Risk Management</a>
+    <a class="nav-item">&#127959; Org Structure</a>
+    <a class="nav-item active">&#128176; Investing</a>
+  </div>
+
+  <div class="main">
+    <!-- Sub-tabs -->
+    <div class="sub-tabs">
+      <button class="sub-tab active">Programs</button>
+      <button class="sub-tab">Investment Operations</button>
+      <button class="sub-tab">Fee Config</button>
+    </div>
+
+    <!-- Investment Program Cards -->
+    <div class="programs-grid">
+      <!-- Program 1: Active -->
+      <div class="program-card">
+        <div class="program-header">
+          <div>
+            <div class="program-name">Alpha Growth Fund</div>
+            <div class="program-strategy">Balanced Strategy &middot; Medium Risk</div>
+          </div>
+          <span class="badge badge-active">Active</span>
+        </div>
+        <div class="program-metrics">
+          <div>
+            <div class="metric-label">AUM</div>
+            <div class="metric-value">$1.2M</div>
+          </div>
+          <div>
+            <div class="metric-label">Investors</div>
+            <div class="metric-value">12</div>
+          </div>
+          <div>
+            <div class="metric-label">MTD Return</div>
+            <div class="metric-value" style="color:var(--green);">+4.2%</div>
+          </div>
+        </div>
+        <div class="program-actions">
+          <button class="action-btn-sm">Edit</button>
+          <button class="action-btn-sm" style="color:var(--cyan);">Fee Config</button>
+          <button class="action-btn-sm">Investors</button>
+        </div>
+      </div>
+
+      <!-- Program 2: Active -->
+      <div class="program-card">
+        <div class="program-header">
+          <div>
+            <div class="program-name">Beta Momentum</div>
+            <div class="program-strategy">Aggressive Strategy &middot; High Risk</div>
+          </div>
+          <span class="badge badge-active">Active</span>
+        </div>
+        <div class="program-metrics">
+          <div>
+            <div class="metric-label">AUM</div>
+            <div class="metric-value">$680K</div>
+          </div>
+          <div>
+            <div class="metric-label">Investors</div>
+            <div class="metric-value">6</div>
+          </div>
+          <div>
+            <div class="metric-label">MTD Return</div>
+            <div class="metric-value" style="color:var(--green);">+7.8%</div>
+          </div>
+        </div>
+        <div class="program-actions">
+          <button class="action-btn-sm">Edit</button>
+          <button class="action-btn-sm" style="color:var(--cyan);">Fee Config</button>
+          <button class="action-btn-sm">Investors</button>
+        </div>
+      </div>
+
+      <!-- Program 3: Paused -->
+      <div class="program-card">
+        <div class="program-header">
+          <div>
+            <div class="program-name">Gamma Conservative</div>
+            <div class="program-strategy">Conservative Strategy &middot; Low Risk</div>
+          </div>
+          <span class="badge badge-paused">Paused</span>
+        </div>
+        <div class="program-metrics">
+          <div>
+            <div class="metric-label">AUM</div>
+            <div class="metric-value">$320K</div>
+          </div>
+          <div>
+            <div class="metric-label">Investors</div>
+            <div class="metric-value">4</div>
+          </div>
+          <div>
+            <div class="metric-label">MTD Return</div>
+            <div class="metric-value" style="color:var(--white-55);">0.0%</div>
+          </div>
+        </div>
+        <div class="program-actions">
+          <button class="action-btn-sm">Edit</button>
+          <button class="action-btn-sm" style="color:var(--green);">Resume</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Profit Distribution -->
+    <div class="section-header">
+      <div class="section-title">Profit Distribution &mdash; Alpha Growth Fund</div>
+    </div>
+
+    <div class="dist-table-card">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Trader</th>
+            <th>Role</th>
+            <th>Exchange</th>
+            <th>Allocation %</th>
+            <th>Monthly PnL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="trader-cell">
+                <div class="trader-avatar">DM</div>
+                <span style="font-weight:500;color:var(--white-92);">Dmitry Morozov</span>
+              </div>
+            </td>
+            <td><span class="role-badge-inline tl">Team Lead</span></td>
+            <td><span class="exchange-badge-sm bybit">Bybit</span></td>
+            <td style="font-weight:500;">35%</td>
+            <td class="pnl-positive">+$14,280</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="trader-cell">
+                <div class="trader-avatar">AV</div>
+                <span style="font-weight:500;color:var(--white-92);">Alex Voronov</span>
+              </div>
+            </td>
+            <td><span class="role-badge-inline st">Senior Trader</span></td>
+            <td><span class="exchange-badge-sm bybit">Bybit</span></td>
+            <td style="font-weight:500;">25%</td>
+            <td class="pnl-positive">+$10,200</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="trader-cell">
+                <div class="trader-avatar">PS</div>
+                <span style="font-weight:500;color:var(--white-92);">Pavel Sidorov</span>
+              </div>
+            </td>
+            <td><span class="role-badge-inline trader">Trader</span></td>
+            <td><span class="exchange-badge-sm binance">Binance</span></td>
+            <td style="font-weight:500;">20%</td>
+            <td class="pnl-positive">+$8,160</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="trader-cell">
+                <div class="trader-avatar">MI</div>
+                <span style="font-weight:500;color:var(--white-92);">Maria Ivanova</span>
+              </div>
+            </td>
+            <td><span class="role-badge-inline trader">Trader</span></td>
+            <td><span class="exchange-badge-sm bybit">Bybit</span></td>
+            <td style="font-weight:500;">20%</td>
+            <td class="pnl-negative">-$2,040</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Role-Based Access -->
+    <div class="section-header">
+      <div class="section-title">Role-Based Access</div>
+    </div>
+
+    <div class="access-card">
+      <div class="access-grid">
+        <div class="access-item">
+          <div class="access-role tl">Team Lead</div>
+          <div style="font-size:11px;color:var(--white-55);margin-bottom:8px;">Full platform control</div>
+          <span class="access-level full">Full Access</span>
+        </div>
+        <div class="access-item">
+          <div class="access-role st">Senior Trader</div>
+          <div style="font-size:11px;color:var(--white-55);margin-bottom:8px;">Own team visibility</div>
+          <span class="access-level team">Own Team</span>
+        </div>
+        <div class="access-item">
+          <div class="access-role rm">Risk Manager</div>
+          <div style="font-size:11px;color:var(--white-55);margin-bottom:8px;">Risk data and policies</div>
+          <span class="access-level risk">Risk Data</span>
+        </div>
+        <div class="access-item">
+          <div class="access-role trader-role">Trader</div>
+          <div style="font-size:11px;color:var(--white-55);margin-bottom:8px;">Personal trading data</div>
+          <span class="access-level own">Own Data</span>
+        </div>
+        <div class="access-item">
+          <div class="access-role investor-role">Investor</div>
+          <div style="font-size:11px;color:var(--white-55);margin-bottom:8px;">Investment reports</div>
+          <span class="access-level reports">Reports</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /workspace -->
+</body>
+</html>
