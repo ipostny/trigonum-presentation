@@ -18,7 +18,20 @@
   --chart-1: #12CCFF; --chart-2: #AF33FF; --chart-3: #00E68A;
   --chart-4: #FFB020; --chart-5: #FF4D6A; --chart-6: #81E70B; --chart-line: #12CCFF;
 }
+
+/* ==== BASE RESET ==== */
 *, *::before, *::after { box-sizing: border-box; }
+
+/* Global font — body + form elements that don't inherit */
+body, button, input, select, textarea, option {
+  font-family: var(--font);
+}
+body {
+  background: var(--navy-900);
+  color: var(--white-92);
+  margin: 0;
+  min-height: 100vh;
+}
 
 /* ==== VIDEO BACKGROUND ==== */
 .video-bg-container {
@@ -44,7 +57,6 @@ body > div:not(.video-bg-container):not(.prototype-badge) {
   border: 1px solid rgba(255,176,32,0.3);
   font-size: 10px; font-weight: 700; letter-spacing: 2px;
   text-transform: uppercase; pointer-events: none;
-  font-family: 'Golos Text', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* ==== TYPOGRAPHY ==== */
@@ -65,11 +77,11 @@ body > div:not(.video-bg-container):not(.prototype-badge) {
 .data-table tr:hover td { background: var(--white-03); }
 
 /* ==== BUTTONS ==== */
-.btn-primary { background: var(--cyan); color: var(--navy-900); border: none; border-radius: var(--r-md); padding: 10px 20px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--font); }
-.btn-secondary { background: transparent; color: var(--white-75); border: 1px solid var(--white-15); border-radius: var(--r-md); padding: 10px 20px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--font); }
+.btn-primary { background: var(--cyan); color: var(--navy-900); border: none; border-radius: var(--r-md); padding: 10px 20px; font-size: 13px; font-weight: 500; cursor: pointer; }
+.btn-secondary { background: transparent; color: var(--white-75); border: 1px solid var(--white-15); border-radius: var(--r-md); padding: 10px 20px; font-size: 13px; font-weight: 500; cursor: pointer; }
 
 /* ==== PERIOD PILLS ==== */
-.period-pill { padding: 6px 14px; font-size: 12px; font-weight: 500; border-radius: var(--r-full); border: 1px solid var(--white-15); background: transparent; color: var(--white-55); cursor: pointer; font-family: var(--font); }
+.period-pill { padding: 6px 14px; font-size: 12px; font-weight: 500; border-radius: var(--r-full); border: 1px solid var(--white-15); background: transparent; color: var(--white-55); cursor: pointer; }
 .period-pill.active { background: var(--cyan); color: var(--navy-900); border-color: var(--cyan); }
 
 /* ==== UTILITIES ==== */
