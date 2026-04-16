@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrigonumTrade — Presentation Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shared-tokens.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--font); background: var(--navy-900); color: var(--white-92); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+.container { max-width: 900px; padding: 60px 40px; }
+.header { text-align: center; margin-bottom: 48px; }
+.logo-row { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 16px; }
+.logo-box { width: 40px; height: 40px; background: linear-gradient(135deg, var(--cyan), var(--purple)); border-radius: 10px; }
+.logo-text { font-size: 24px; font-weight: 800; }
+.subtitle { font-size: 14px; color: var(--white-55); letter-spacing: 2px; text-transform: uppercase; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.mockup-card { background: var(--card-gradient); border: 1px solid var(--white-08); border-radius: var(--r-lg); padding: 28px; text-decoration: none; color: var(--white-92); position: relative; overflow: hidden; box-shadow: var(--shadow-card); transition: transform 0.2s, box-shadow 0.2s; }
+.mockup-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-elevated); border-color: var(--white-15); }
+.mockup-card::before { content: ''; position: absolute; top: -15px; right: -15px; width: 0; height: 0; border-left: 40px solid transparent; border-right: 40px solid transparent; border-bottom: 70px solid var(--white-03); transform: rotate(15deg); pointer-events: none; }
+.slide-num { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--white-35); margin-bottom: 10px; }
+.card-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.card-title-ru { font-size: 14px; color: var(--cyan); margin-bottom: 10px; }
+.card-desc { font-size: 13px; color: var(--white-55); line-height: 1.5; }
+.card-role { display: inline-block; margin-top: 14px; padding: 4px 12px; border-radius: var(--r-full); font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.role-tl { background: rgba(18,204,255,0.15); color: var(--cyan); border: 1px solid rgba(18,204,255,0.25); }
+.role-rm { background: rgba(255,176,32,0.15); color: var(--amber); border: 1px solid rgba(255,176,32,0.25); }
+.role-trader { background: rgba(0,230,138,0.15); color: var(--green); border: 1px solid rgba(0,230,138,0.25); }
+.footer { text-align: center; margin-top: 40px; font-size: 12px; color: var(--white-35); }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="logo-row"><div class="logo-box"></div><span class="logo-text">TrigonumTrade</span></div>
+    <div class="subtitle">Presentation Mockups</div>
+  </div>
+  <div class="cards">
+    <a href="pres-org-structure.html" class="mockup-card">
+      <div class="slide-num">Slide 5</div>
+      <div class="card-title">Management Structure</div>
+      <div class="card-title-ru">Структура управления</div>
+      <div class="card-desc">Org tree: Team Lead → Senior Trader + Risk Manager pairs → Traders.</div>
+      <span class="card-role role-tl">Team Lead View</span>
+    </a>
+    <a href="pres-trading.html" class="mockup-card">
+      <div class="slide-num">Slide 4</div>
+      <div class="card-title">Trading Terminal</div>
+      <div class="card-title-ru">Наше решение</div>
+      <div class="card-desc">Full trading interface with TradingView chart, order form. Bybit API.</div>
+      <span class="card-role role-trader">Trader View</span>
+    </a>
+    <a href="pres-risk-management.html" class="mockup-card">
+      <div class="slide-num">Slide 7</div>
+      <div class="card-title">Risk Management</div>
+      <div class="card-title-ru">Риск-менеджмент</div>
+      <div class="card-desc">Risk dashboard with trader table, risk budget bars, warnings, policies.</div>
+      <span class="card-role role-rm">Risk Manager View</span>
+    </a>
+    <a href="pres-platform-flexibility.html" class="mockup-card">
+      <div class="slide-num">Slide 10</div>
+      <div class="card-title">Platform Flexibility</div>
+      <div class="card-title-ru">Гибкость платформы</div>
+      <div class="card-desc">Investment programs, profit distribution, role-based access.</div>
+      <span class="card-role role-tl">Team Lead View</span>
+    </a>
+  </div>
+  <div class="footer">TrigonumTrade © 2024–2026 · Open each page and take a screenshot</div>
+</div>
+</body>
+</html>
